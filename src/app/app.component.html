@@ -1,0 +1,172 @@
+<div>
+  <nav class="navbar navbar-light bg-dark">
+    <a class="navbar-brand text-white" href="#">Intern Assignment</a>
+  </nav>
+  <div class="container mt pt-5">
+    <div *ngIf="msg != ''" class="alert alert-info" role="alert">
+      {{ msg }}
+    </div>
+    <form class="form-group" #voucherform="ngForm" (ngSubmit)="getFormData(voucherform, $event)">
+      <div class="row">
+        <div class="col-md-3">
+          <label>
+            Voucher Type
+          </label>
+        </div>
+        <div class="col-md-5">
+          <select class="form-group form-control" ngModel #vouchertype="ngModel" name="vouchertype">
+            <option value="addnew">Add New Voucher</option>
+            <option *ngFor="let x of allData" value="{{ x.vouchertype }}">{{ x.vouchertype }}</option>
+          </select>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-3">
+          HSN / SAC Code
+        </div>
+        <div class="col-md-5">
+          <input type="number" ngModel #hsncode="ngModel" name="hsncode" class="form-control form-group"
+            placeholder="HSN / SAC Code">
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-2">
+          <label>Debit GL Code</label>
+        </div>
+        <div class="col-md-3">
+          <input type="number" ngModel #debitglcode="ngModel" name="debitglcode" class="form-control form-group"
+            placeholder="Debit GL Code">
+        </div>
+        <div class="col-md-1">
+        </div>
+        <div class="col-md-2">
+          <label>Credit GL Code</label>
+        </div>
+        <div class="col-md-3">
+          <input type="number" ngModel #creditglcode="ngModel" name="creditglcode" class="form-control form-group"
+            placeholder="Credit GL Code">
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-2">
+          <label>Debit GL Name</label>
+        </div>
+        <div class="col-md-3">
+          <input type="text" ngModel #debitglname="ngModel" name="debitglname" class="form-control form-group"
+            placeholder="Debit GL Name">
+        </div>
+        <div class="col-md-1">
+        </div>
+        <div class="col-md-2">
+          <label>Credit GL Name</label>
+        </div>
+        <div class="col-md-3">
+          <input type="text" ngModel #creditglname="ngModel" name="creditglname" class="form-control form-group"
+            placeholder="Credit GL Name">
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-2">
+          <label>IGST (%)</label>
+        </div>
+        <div class="col-md-3">
+          <input type="number" ngModel #igstone="ngModel" name="igstone" class="form-control form-group"
+            placeholder="IGST (%)">
+        </div>
+        <div class="col-md-1">
+        </div>
+        <div class="col-md-2">
+          <label>IGST (%)</label>
+        </div>
+        <div class="col-md-3">
+          <input type="number" ngModel #igsttwo="ngModel" name="igsttwo" class="form-control form-group"
+            placeholder="IGST (%)">
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-2">
+          <label>CGST (%)</label>
+        </div>
+        <div class="col-md-3">
+          <input type="number" ngModel #cgstone="ngModel" name="cgstone" class="form-control form-group"
+            placeholder="CGST (%)">
+        </div>
+        <div class="col-md-1">
+        </div>
+        <div class="col-md-2">
+          <label>CGST (%)</label>
+        </div>
+        <div class="col-md-3">
+          <input type="number" ngModel #cgsttwo="ngModel" name="cgsttwo" class="form-control form-group"
+            placeholder="CGST (%)">
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-2">
+          <label>SGST (%)</label>
+        </div>
+        <div class="col-md-3">
+          <input type="number" ngModel #sgstone="ngModel" name="sgstone" class="form-control form-group"
+            placeholder="SGST (%)">
+        </div>
+        <div class="col-md-1">
+        </div>
+        <div class="col-md-2">
+          <label>SGST (%)</label>
+        </div>
+        <div class="col-md-3">
+          <input type="number" ngModel #sgsttwo="ngModel" name="sgsttwo" class="form-control form-group"
+            placeholder="SGST (%)">
+        </div>
+      </div>
+      <textarea class="form-group form-control col-md-11" #note="ngModel" ngModel name="note" placeholder="fill with suitable remark">
+      </textarea>
+      <div class="row" style="float: right;">
+        <div class="col-md-1 m-4">
+          <button class="btn btn-sm btn-primary" name="add">Add</button>
+        </div>
+        <div class="col-md-1 m-4">
+          <button class="btn btn-sm btn-primary" name="modify">Modify</button>
+        </div>
+        <div class="col-md-1 m-4">
+          <button class="btn btn-sm btn-primary" name="delete">Delete</button>
+        </div>
+      </div>
+    </form>
+  </div>
+    <table class="table">
+      <thead class="thead-dark">
+        <tr>
+          <th>Voucher Type</th>
+          <th>HSN/SAC Code</th>
+          <th>Debit GL Code</th>
+          <th>Credit GL Code</th>
+          <th>Debit GL Name</th>
+          <th>Credit GL Name</th>
+          <th>IGST (%)</th>
+          <th>CGST (%)</th>
+          <th>SGST (%)</th>
+          <th>IGST (%)</th>
+          <th>CGST (%)</th>
+          <th>SGST (%)</th>
+          <th>Note</th>
+        </tr>
+      </thead>
+      <tr *ngFor="let x of allData">
+        <td>{{ x.vouchertype }}</td>
+        <td>{{ x.hsncode }}</td>
+        <td>{{ x.debitgl }}</td>
+        <td>{{ x.creditgl }}</td>
+        <td>{{ x.debitglname }}</td>
+        <td>{{ x.creditglname }}</td>
+        <td>{{ x.igstone }}</td>
+        <td>{{ x.cgstone }}</td>
+        <td>{{ x.sgstone }}</td>
+        <td>{{ x.igsttwo }}</td>
+        <td>{{ x.cgsttwo }}</td>
+        <td>{{ x.sgsttwo }}</td>
+        <td>{{ x.note }}</td>
+      </tr>
+    </table>
+  <br/><br/><br/><br/><br/>
+</div>
